@@ -50,15 +50,48 @@ def opsomming ()
   end
 end
 
+$letters = [*"a".."z"]
 
-
-def shift (letter)
-  letters = ["a".."z"]
-  puts(letters.index(letter))
-  return letters[letters.index(letter) + 2]
+def shift (letter, ap)
+  if isalpha(letter)
+    nieuwepos = ($letters.index(letter) + ap)
+    return $letters[nieuwepos % 26]
+  else
+    return letter
+  end
 end
 
-puts (shift("h"))
+def isalpha(str)
+  !str.match(/[^A-Za-z]/)
+end
+
+def encrypt (woord, posities)
+  res = ""
+  res2 = ""
+
+  #woord.each_char do |c|
+  #  res += shift(c, posities)
+  #end
+
+  for letter in woord.split("")
+    #puts(letter)
+    res2 += shift(letter, posities)
+  end
+
+  return res2
+end
+
+
+def readFile ()
+  contents = File.read('secret.txt')
+  puts(contents)
+  for i in (0..25)
+    puts(encrypt(contents.downcase(), -i))
+  end
+end
+
+
+readFile()
 #opsomming()
 #zeef(10000)
 #FizzBuzz(100)
