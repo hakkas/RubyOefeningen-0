@@ -8,27 +8,48 @@ $gutter: 30px;
 $grid-columns: 10;
 $max-width: em(720);
 $navigation-color: blue;
+$start-gradient-color: #268BD2;
+$end-gradient-color: #7229d1;
 
 body {
-  background-color: #cccccc;
+
 }
 
-a {
-  color: #ff4136;
+
+.box {
+  @include size(100px);
+  border: 1px solid green;
+  font-family: $helvetica;
+  background-color: tint(red, 40%);
+
 }
 
 div.container {
+  border: 1px solid green;
   @include outer-container;
 }
 
-header {
-  ul li {
-    a {
-      color: $navigation-color;
-    }
-  }
+.box:hover {
+  @include linear-gradient(to top, red, orange);
 }
 
-.opvallend {
-  color: green;
+$small-font-size: 0.75em;
+$badges: (
+  "alert": #fff6bf,
+  "default": #999,
+  "error": #fbe3e4,
+  "notice": #e5edf8,
+  "success": #e6efc2,
+) !default;
+
+@each $badge-type, $color in $badges {
+  .badge-#{$badge-type} {
+    background-color: $color;
+    border-radius: $small-font-size * 5;
+    color: darken($color, 60%);
+    display: inline-block;
+    font-size: $small-font-size;
+    line-height: 1;
+    padding: 0.4em 1.2em;
+  }
 }
